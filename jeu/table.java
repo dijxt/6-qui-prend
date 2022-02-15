@@ -19,8 +19,8 @@ public class table {
         // on attribue la première carte de chaque liste
         for (int i = 0; i < 4; ++i){
             this.lisTab.add(new ArrayList<>());
-            this.lisTab.get(i).add(this.pioche.get(this.pioche.size()));
-            this.pioche.remove(this.pioche.size());
+            this.lisTab.get(i).add(this.pioche.get(this.pioche.size() - 1));
+            this.pioche.remove(this.pioche.size() - 1);
         }
 
 
@@ -30,8 +30,8 @@ public class table {
         for (String p : listeNoms){
             this.joueurs.add(new joueur(p));
             for (int j = 0; j < 10; ++j){
-                joueurs.get(numJoueur).prendreCarte(this.pioche.get(this.pioche.size()));
-                this.pioche.remove(this.pioche.size());
+                joueurs.get(numJoueur).prendreCarte(this.pioche.get(this.pioche.size() - 1));
+                this.pioche.remove(this.pioche.size() - 1);
             }
             ++numJoueur;
         }
@@ -83,5 +83,13 @@ public class table {
         }
 
         return tete;
+    }
+
+    public ArrayList<ArrayList<carte>> getLisTab() {
+        return lisTab;
+    }
+
+    public ArrayList<joueur> getJoueurs() {
+        return joueurs;
     }
 }

@@ -1,15 +1,15 @@
 package Appli;
-import jeu.table;
-import Appli.InputOutput;
-import util.Console.*;
+import jeu.Table;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static Appli.InputOutput.*;
+/*import static Appli.Game.quiVaRamasser;*/
+import static Appli.Input.*;
+import static Appli.Output.*;
+import static Appli.Game.jouerCarte;
 import static util.Console.clearScreen;
 import static util.Console.pause;
 
@@ -35,31 +35,44 @@ public class Main {
         return new ArrayList<>();
     }
 
-    private static void serie(table t){
+
+
+
+    private static void serie(Table t, Scanner sc){
         for(int i = 0; i < lireConfig().size(); ++i){
             System.out.println(tourJoueur(t.getJoueurs().get(i).nomJoueur()));
             pause();
-            for (int j = 0; i < 4; ++j){
+            for (int j = 0; j < 4; ++j){
                 System.out.println(afficherSerie(t.getLisTab().get(j), j + 1));
             }
-            t.getJoueurs().get(i).setProchainCoup(saisirChoix(t, i));
+            System.out.println(cartesJoueur(t.getJoueurs().get(i)));
+            t.getJoueurs().get(i).setProchainCoup(saisirChoix(t, i, sc));
             clearScreen();
         }
-
-
-    }
-
-    private static void jouer(table t){
-        for(int i = 0; i < 10; ++i){
-            serie(t);
+        t.ordreJeu();
+        System.out.println(cartesAJouer(t));
+        for(int i = 0; i < lireConfig().size(); ++i){
+            jouerCarte(t, i, sc);
         }
+        System.out.println(cartesPosees(t));
+        for (int j = 0; j < 4; ++j){
+            System.out.println(afficherSerie(t.getLisTab().get(j), j + 1));
+        }
+        // TODO: 21/02/2022 afficher tete de boeuf fin de série 
+        t.remettreOrdre();
     }
+
+
 
     public static void main (String[] args) {
-        table t = new table(lireConfig());
+        Table t = new Table(lireConfig());
+        Scanner sc = new Scanner(System.in);
         System.out.println(messageDebut(lireConfig()));
-        jouer(t);
-
+        for(int i = 0; i < 10; ++i){
+            serie(t, sc);
+        }
+        // TODO: 21/02/2022 afficher resultat final 
+        sc.close();
     }
 
 }

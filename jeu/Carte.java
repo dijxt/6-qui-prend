@@ -1,10 +1,10 @@
 package jeu;
 
-public class carte {
+public class Carte implements Comparable<Carte>{
     private int num = 0;
     private int tete = 0;
 
-    public carte(int val){
+    public Carte(int val){
         this.num = val;
         if (val == 55){
             this.tete = 7;
@@ -21,6 +21,11 @@ public class carte {
         else{
             this.tete = 1;
         }
+    }
+
+    @Override
+    public int compareTo(Carte o) {
+        return (this.num - o.num);
     }
 
     public int getNum() {

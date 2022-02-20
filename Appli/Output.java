@@ -5,9 +5,8 @@ import jeu.Joueur;
 import jeu.Table;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class InputOutput {
+public class Output {
 
     public static String messageDebut(ArrayList<String> joueurs) {
         String players = "";
@@ -37,7 +36,7 @@ public class InputOutput {
                     cartes = cartes + c.getNum() + " (" + c.getTete() + ")";
                 }
                 else{
-                    cartes = cartes + ", " + c.getNum() + "(" + c.getTete() + ")";
+                    cartes = cartes + ", " + c.getNum() + " (" + c.getTete() + ")";
                 }
             }
             else{
@@ -55,17 +54,17 @@ public class InputOutput {
     public static String cartesJoueur(Joueur j){
         String cartes = "- Vos cartes : ";
         for (Carte c: j.getDeck()) {
-            if (c == j.getDeck().get(j.getDeck().size() - 1)){
+            if (c == j.getDeck().get(0)){
                 if (c.getTete() > 1){
                     cartes = cartes + String.valueOf(c.getNum()) + " (" + String.valueOf(c.getTete()) + ")";
                 }
                 else {
-                    cartes = cartes + ", " + String.valueOf(c.getNum()) + "(" + String.valueOf(c.getTete()) + ")";
+                    cartes = cartes + String.valueOf(c.getNum());
                 }
             }
             else {
                 if (c.getTete() > 1){
-                    cartes = cartes + String.valueOf(c.getNum()) + " (" + String.valueOf(c.getTete()) + ")";
+                    cartes = cartes + ", " + String.valueOf(c.getNum()) + " (" + String.valueOf(c.getTete()) + ")";
                 }
                 else {
                     cartes = cartes + ", " + String.valueOf(c.getNum());
@@ -75,33 +74,13 @@ public class InputOutput {
         return cartes;
     }
 
-    public static int saisirChoix(Table t, int joueur){
-        System.out.print("Saisissez votre choix : ");
-        boolean choixValide = false;
-        int coup = 0;
-        Scanner sc = new Scanner(System.in);
-        while (choixValide){
-            coup = Integer.valueOf(sc.next());
-            for (Carte c : t.getJoueurs().get(joueur).getDeck()){
-                if(c.getNum() == coup){
-                    choixValide = true;
-                }
-            }
-            if (choixValide == false){
-                System.out.print("Vous n?avez pas cette carte, saisissez votre choix : ");
-            }
-        }
-        sc.close();
-        return coup;
-    }
-
     public static String cartesAJouer(Table t){
         String cartes = "";
-        for (Joueur j : t.getJoueurs()){
-            if (j == t.getJoueurs().get(0)){
+        for (Joueur j : t.getOrdreJoueur()){
+            if (j == t.getOrdreJoueur().get(0)){
                 cartes = cartes + String.valueOf(j.getProchainCoup()) + " (" + j.nomJoueur() + ")";
             }
-            else if (j == t.getJoueurs().get(t.getJoueurs().size() - 1)){
+            else if (j == t.getOrdreJoueur().get(t.getOrdreJoueur().size() - 1)){
                 cartes = cartes + " et " + String.valueOf(j.getProchainCoup()) + " (" + j.nomJoueur() + ")";
             }
             else {
@@ -109,5 +88,21 @@ public class InputOutput {
             }
         }
         return "Les cartes " + cartes + " vont êtres posées";
+    }
+
+    public static String cartesPosees(Table t){
+        String cartes = "";
+        for (Joueur j : t.getOrdreJoueur()){
+            if (j == t.getOrdreJoueur().get(0)){
+                cartes = cartes + String.valueOf(j.getProchainCoup()) + " (" + j.nomJoueur() + ")";
+            }
+            else if (j == t.getOrdreJoueur().get(t.getOrdreJoueur().size() - 1)){
+                cartes = cartes + " et " + String.valueOf(j.getProchainCoup()) + " (" + j.nomJoueur() + ")";
+            }
+            else {
+                cartes = cartes + ", " + String.valueOf(j.getProchainCoup()) + " (" + j.nomJoueur() + ")";
+            }
+        }
+        return "Les cartes " + cartes + " ont été posées.";
     }
 }

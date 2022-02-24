@@ -7,53 +7,41 @@ import java.util.Scanner;
 
 import static Appli.Input.saisirSerie;
 import static Appli.Output.afficherSerie;
+import static Appli.Output.cartesAJouer;
 
 public class Game {
+
+    /**
+     * Joue la carte d'un joueur sur une table
+     * @param t la table
+     * @param joueur le joueur
+     * @param sc entrée clavier si besoin de sélectionner une série à ramasser
+     */
     public static void jouerCarte(Table t, int joueur, Scanner sc){
         int carte = t.getJoueurs().get(joueur).getProchainCoup();
-        if (t.choixListe(t.getJoueurs().get(joueur).getProchainCoup()) == -1){
+        if (t.choixListe(t.getJoueurs().get(joueur).getProchainCoup()) == -1){ // si le joueur doit ramasser une série
             int serie = -1;
+            System.out.println(cartesAJouer(t));
             System.out.println("Pour poser la carte " + String.valueOf(t.getJoueurs().get(joueur).getProchainCoup()) + ", " + t.getJoueurs().get(joueur).nomJoueur() + " doit choisir la série qu'il va ramasser.");
             for (int j = 0; j < 4; ++j){
                 System.out.println(afficherSerie(t.getLisTab().get(j), j + 1));
             }
-            serie = saisirSerie(t, joueur, sc);
-            for (int j = 0; j < t.getLisTab().get(serie - 1).size(); ++j){
-                t.getJoueurs().get(joueur).setPoints(t.getLisTab().get(serie - 1).get(0).getTete());
+            serie = saisirSerie(joueur, sc);
+            int head = 0;
+            while (!t.getLisTab().get(serie - 1).isEmpty()){
+                head += t.getLisTab().get(serie - 1).get(0).getTete();
                 t.getLisTab().get(serie - 1).remove(0);
             }
+            t.getJoueurs().get(joueur).setPoints(head);
+            t.getJoueurs().get(joueur).setPointsDM(head);
             t.getLisTab().get(serie - 1).add(new Carte(t.getJoueurs().get(joueur).getProchainCoup()));
             t.getJoueurs().get(joueur).jposerCarte(carte);
         }
-        else {
+        else { // poser la carte
             t.getJoueurs().get(joueur).jposerCarte(carte);
-            t.jouerCarte(carte, joueur);
+            t.getJoueurs().get(joueur).setPointsDM(t.jouerCarte(carte, joueur));
+            t.getJoueurs().get(joueur).setPoints(t.getJoueurs().get(joueur).getPointsDM());
         }
 
     }
-
-    /*public static void quiVaRamasser(Table t, Scanner sc){
-        for (int i = 0; i < t.getJoueurs().size(); ++i){
-            if (t.choixListe(t.getJoueurs().get(i).getProchainCoup()) == -1){
-                t.getJoueurs().get(i).setDoitRamasser(true);
-            }
-        }
-        for (int i = 0; i < t.getJoueurs().size(); ++i){
-            if (t.getJoueurs().get(i).getDoitRamasser()){
-                int serie = -1;
-                System.out.println("Pour poser la carte " + String.valueOf(t.getJoueurs().get(i).getProchainCoup()) + ", " + t.getJoueurs().get(i).nomJoueur() + " doit choisir la série qu'il va ramasser.");
-                for (int j = 0; j < 4; ++j){
-                    System.out.println(afficherSerie(t.getLisTab().get(j), j + 1));
-                }
-                serie = saisirSerie(t, i, sc);
-                for (int j = 0; j < t.getLisTab().get(serie - 1).size(); ++j){
-                    t.getJoueurs().get(i).setPoints(t.getLisTab().get(serie - 1).get(0).getTete());
-                    t.getLisTab().get(serie - 1).remove(0);
-                }
-                t.getLisTab().get(serie - 1).add(new Carte(t.getJoueurs().get(i).getProchainCoup()));
-
-                t.getJoueurs().get(i).setDoitRamasser(false);
-            }
-        }
-    }*/
 }

@@ -4,6 +4,10 @@ public class Carte implements Comparable<Carte>{
     private int num = 0;
     private int tete = 0;
 
+    /**
+     * Constructeur de la classe, crée une carte selon les règles du jeu
+     * @param val le numéro de carte
+     */
     public Carte(int val){
         this.num = val;
         if (val == 55){
@@ -23,15 +27,28 @@ public class Carte implements Comparable<Carte>{
         }
     }
 
+    /**
+     * Comparateur qui permet de trier des cartes
+     * @param o objet à comparer
+     * @return une valeur de comparaison
+     */
     @Override
     public int compareTo(Carte o) {
         return (this.num - o.num);
     }
 
+    /**
+     * Renvoie le numéro d'une carte
+     * @return le numéro
+     */
     public int getNum() {
         return num;
     }
 
+    /**
+     * Renvoie le nombre de têtes de b?ufs d'une carte
+     * @return le nombre
+     */
     public int getTete() {
         return tete;
     }

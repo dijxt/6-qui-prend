@@ -9,6 +9,10 @@ public class Table {
     private ArrayList<ArrayList<Carte>> lisTab = new ArrayList<>();
     private ArrayList<Joueur> ordreJoueur = new ArrayList<>();
 
+    /**
+     * Constructeur de la classe table, initialise une partie avec une liste de joueurs
+     * @param listeNoms les joueurs
+     */
     public Table(ArrayList<String> listeNoms){
         // on vérifie que l'on a le bon nombre de joueurs
         assert(listeNoms.size() > 1 && listeNoms.size() < 11);
@@ -43,6 +47,11 @@ public class Table {
         }
     }
 
+    /**
+     * Choisit la série sur laquelle une carte doit être posée
+     * @param c la carte
+     * @return un numéro de série
+     */
     public int choixListe(int c){
         int choix = -1;
         int diff = 105;
@@ -59,19 +68,13 @@ public class Table {
         return choix;
     }
 
-    public void poserCarte(int carte, int choix){
-        int tete = 0;
-        this.lisTab.get(choix).add(new Carte(carte));
-
-        if (this.lisTab.get(choix).size() > 5){
-            for (int i = 0; i < 5; ++i){
-                tete = tete + this.lisTab.get(choix).get(i).getTete();
-            }
-
-            this.lisTab.get(choix).subList(0, 5).clear();
-        }
-    }
-    public void jouerCarte(int carte, int joueur){
+    /**
+     * Joue une carte d'un joueur sur la table
+     * @param carte la carte
+     * @param joueur le joueur
+     * @return le nombre de têtes de b?ufs devant êtres ramassés
+     */
+    public int jouerCarte(int carte, int joueur){
         int choix = this.choixListe(carte);
         int tete = 0;
 
@@ -87,25 +90,44 @@ public class Table {
                 this.lisTab.get(choix).subList(0, 5).clear();
             }
         }
+        return tete;
     }
 
+    /**
+     * Tri les joueur par rapport à l'ordre des cartes d'une manche
+     */
     public void ordreJeu(){
         this.ordreJoueur = this.joueurs;
         this.ordreJoueur.sort(Joueur::compareTo);
     }
 
+    /**
+     * Remet les joueurs à leur ordre initial
+     */
     public void remettreOrdre(){
         this.joueurs.sort(Joueur::compareToNum);
     }
 
+    /**
+     * Renvoie une liste de joueurs ordonnés
+     * @return la liste
+     */
     public ArrayList<Joueur> getOrdreJoueur() {
         return ordreJoueur;
     }
 
+    /**
+     * Renvoie les séries
+     * @return les séries
+     */
     public ArrayList<ArrayList<Carte>> getLisTab() {
         return lisTab;
     }
 
+    /**
+     * Renvoie les joueurs
+     * @return les joueurs
+     */
     public ArrayList<Joueur> getJoueurs() {
         return joueurs;
     }

@@ -46,7 +46,7 @@ public class Carte implements Comparable<Carte>{
     }
 
     /**
-     * Renvoie le nombre de têtes de b?ufs d'une carte
+     * Renvoie le nombre de têtes de boeufs d'une carte
      * @return le nombre
      */
     public int getTete() {

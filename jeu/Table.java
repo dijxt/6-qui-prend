@@ -72,7 +72,7 @@ public class Table {
      * Joue une carte d'un joueur sur la table
      * @param carte la carte
      * @param joueur le joueur
-     * @return le nombre de têtes de b?ufs devant êtres ramassés
+     * @return le nombre de têtes de boeufs devant êtres ramassés
      */
     public int jouerCarte(int carte, int joueur){
         int choix = this.choixListe(carte);
@@ -94,7 +94,7 @@ public class Table {
     }
 
     /**
-     * Tri les joueur par rapport à l'ordre des cartes d'une manche
+     * Tri les joueurs par rapport à l'ordre des cartes d'une manche
      */
     public void ordreJeu(){
         this.ordreJoueur = this.joueurs;
@@ -106,6 +106,14 @@ public class Table {
      */
     public void remettreOrdre(){
         this.joueurs.sort(Joueur::compareToNum);
+    }
+
+    /**
+     * Tri les joueurs par rapport à l'ordre des têtes de boeuf d'une manche
+     */
+    public void ordreTetes(){
+        this.joueurs.sort(Joueur::compareToNom);
+        this.joueurs.sort(Joueur::compareToPointsManche);
     }
 
     /**

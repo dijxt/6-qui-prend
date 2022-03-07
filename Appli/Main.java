@@ -65,6 +65,7 @@ public class Main {
         for (int j = 0; j < 4; ++j){
             System.out.println(afficherSerie(t.getLisTab().get(j), j + 1));
         }
+        t.ordreTetes();
         System.out.println(tetesDeBoeufs(t)); // joueurs ayant ramassés
         t.remettreOrdre();
     }

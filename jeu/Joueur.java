@@ -90,7 +90,7 @@ public class Joueur implements Comparable<Joueur>{
 
     /**
      * Renvoie le nombre de points du joueur
-     * @return
+     * @return les points
      */
     public int getPoints() {
         return points;
@@ -106,7 +106,7 @@ public class Joueur implements Comparable<Joueur>{
 
     /**
      * Renvoie le nombre de points pris sur une manche
-     * @return
+     * @return les points
      */
     public int getPointsDM() {
         return pointsDM;
@@ -138,5 +138,24 @@ public class Joueur implements Comparable<Joueur>{
      */
     public int compareToPoints(Joueur o){
         return (this.points - o.points);
+    }
+
+    /**
+     * Comparateur qui permet de trier l'ordre des têtes de boeuf
+     * @param o l'objet à comparer
+     * @return une valeur de comparaison
+     */
+    public int compareToPointsManche(Joueur o){
+        return (this.pointsDM - o.pointsDM);
+    }
+
+    /**
+     * Comparateur qui permet de trier l'ordre des résultats par nom
+     * @param o l'objet à comparer
+     * @return une valeur de comparaison
+     */
+
+    public int compareToNom(Joueur o){
+        return (this.nom.compareTo(o.nom));
     }
 }

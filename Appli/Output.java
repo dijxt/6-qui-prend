@@ -155,9 +155,9 @@ public class Output {
                 }
                 else {
                     if (t.getJoueurs().get(i).getPointsDM() == 1) {
-                        message = "\n" + t.getJoueurs().get(i).nomJoueur() + " a ramassé " + String.valueOf(t.getJoueurs().get(i).getPointsDM()) + " tête de boeufs";
+                        message = message + "\n" + t.getJoueurs().get(i).nomJoueur() + " a ramassé " + String.valueOf(t.getJoueurs().get(i).getPointsDM()) + " tête de boeufs";
                     } else {
-                        message = "\n" + t.getJoueurs().get(i).nomJoueur() + " a ramassé " + String.valueOf(t.getJoueurs().get(i).getPointsDM()) + " têtes de boeufs";
+                        message = message + "\n" + t.getJoueurs().get(i).nomJoueur() + " a ramassé " + String.valueOf(t.getJoueurs().get(i).getPointsDM()) + " têtes de boeufs";
                     }
                 }
             }
@@ -175,7 +175,8 @@ public class Output {
      */
     public static String messageFin(Table t) {
         String message = "** Score final";
-        t.getJoueurs().sort(Joueur::compareToPoints);
+        t.getJoueurs().sort(Joueur::compareToNom); // ordre alphabétique
+        t.getJoueurs().sort(Joueur::compareToPoints); // ordre classement
         for (int i = 0; i < t.getJoueurs().size(); ++i){
             if (t.getJoueurs().get(i).getPoints() > 1){
                 message = message + "\n" + t.getJoueurs().get(i).nomJoueur() + " a ramassé " + String.valueOf(t.getJoueurs().get(i).getPoints()) + " têtes de boeufs";

@@ -52,4 +52,18 @@ public class Carte implements Comparable<Carte>{
     public int getTete() {
         return tete;
     }
+
+    /**
+     * Renvoie une carte
+     * @return la carte
+     */
+    @Override
+    public String toString() {
+        if (this.tete > 1){
+            return this.num + " (" + this.tete + ")";
+        }
+        else{
+            return String.valueOf(this.num);
+        }
+    }
 }

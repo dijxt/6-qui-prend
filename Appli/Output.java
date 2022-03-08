@@ -15,14 +15,12 @@ public class Output {
      */
     public static String messageDebut(ArrayList<String> joueurs) {
         String players = "";
-        for (String e:joueurs) {
-            if (e == joueurs.get(0)){
+        for (String e : joueurs) {
+            if (e == joueurs.get(0)) {
                 players = players + e;
-            }
-            else if (e == joueurs.get(joueurs.size()-1)){
+            } else if (e == joueurs.get(joueurs.size() - 1)) {
                 players = players + " et " + e;
-            }
-            else {
+            } else {
                 players = players + ", " + e;
             }
         }
@@ -34,34 +32,23 @@ public class Output {
      * @param joueur le joueur
      * @return le message
      */
-    public static String tourJoueur(String joueur){
+    public static String tourJoueur(String joueur) {
         return "A " + joueur + " de jouer.";
     }
 
     /**
      * Met en forme une série d'une liste de series avec son numéro
-     * @param serie la liste
+     * @param serie    la liste
      * @param numSerie le numéro
      * @return la série
      */
-    public static String afficherSerie(ArrayList<Carte> serie, int numSerie){
+    public static String afficherSerie(ArrayList<Carte> serie, int numSerie) {
         String cartes = "";
-        for (Carte c : serie){
-            if (c.getTete() > 1){
-                if (c == serie.get(0)){
-                    cartes = cartes + c.getNum() + " (" + c.getTete() + ")";
-                }
-                else{
-                    cartes = cartes + ", " + c.getNum() + " (" + c.getTete() + ")";
-                }
-            }
-            else{
-                if (c == serie.get(0)){
-                    cartes = cartes + c.getNum();
-                }
-                else{
-                    cartes = cartes + ", " + c.getNum();
-                }
+        for (Carte c : serie) {
+            if (c == serie.get(0)) {
+                cartes = cartes + c.toString();
+            } else {
+                cartes = cartes + ", " + c.toString();
             }
         }
         return "- série n° " + String.valueOf(numSerie) + " : " + cartes;
@@ -72,24 +59,13 @@ public class Output {
      * @param j le joueur
      * @return ses cartes
      */
-    public static String cartesJoueur(Joueur j){
+    public static String cartesJoueur(Joueur j) {
         String cartes = "- Vos cartes : ";
-        for (Carte c: j.getDeck()) {
-            if (c == j.getDeck().get(0)){
-                if (c.getTete() > 1){
-                    cartes = cartes + String.valueOf(c.getNum()) + " (" + String.valueOf(c.getTete()) + ")";
-                }
-                else {
-                    cartes = cartes + String.valueOf(c.getNum());
-                }
-            }
-            else {
-                if (c.getTete() > 1){
-                    cartes = cartes + ", " + String.valueOf(c.getNum()) + " (" + String.valueOf(c.getTete()) + ")";
-                }
-                else {
-                    cartes = cartes + ", " + String.valueOf(c.getNum());
-                }
+        for (Carte c : j.getDeck()) {
+            if (c == j.getDeck().get(0)) {
+                cartes = cartes + c.toString();
+            } else {
+                cartes = cartes + ", " + c.toString();
             }
         }
         return cartes;
@@ -100,16 +76,14 @@ public class Output {
      * @param t la table
      * @return les cartes
      */
-    public static String cartesAJouer(Table t){
+    public static String cartesAJouer(Table t) {
         String cartes = "";
-        for (Joueur j : t.getOrdreJoueur()){
-            if (j == t.getOrdreJoueur().get(0)){
+        for (Joueur j : t.getOrdreJoueur()) {
+            if (j == t.getOrdreJoueur().get(0)) {
                 cartes = cartes + String.valueOf(j.getProchainCoup()) + " (" + j.nomJoueur() + ")";
-            }
-            else if (j == t.getOrdreJoueur().get(t.getOrdreJoueur().size() - 1)){
+            } else if (j == t.getOrdreJoueur().get(t.getOrdreJoueur().size() - 1)) {
                 cartes = cartes + " et " + String.valueOf(j.getProchainCoup()) + " (" + j.nomJoueur() + ")";
-            }
-            else {
+            } else {
                 cartes = cartes + ", " + String.valueOf(j.getProchainCoup()) + " (" + j.nomJoueur() + ")";
             }
         }
@@ -121,16 +95,14 @@ public class Output {
      * @param t la table
      * @return les cartes
      */
-    public static String cartesPosees(Table t){
+    public static String cartesPosees(Table t) {
         String cartes = "";
-        for (Joueur j : t.getOrdreJoueur()){
-            if (j == t.getOrdreJoueur().get(0)){
+        for (Joueur j : t.getOrdreJoueur()) {
+            if (j == t.getOrdreJoueur().get(0)) {
                 cartes = cartes + String.valueOf(j.getProchainCoup()) + " (" + j.nomJoueur() + ")";
-            }
-            else if (j == t.getOrdreJoueur().get(t.getOrdreJoueur().size() - 1)){
+            } else if (j == t.getOrdreJoueur().get(t.getOrdreJoueur().size() - 1)) {
                 cartes = cartes + " et " + String.valueOf(j.getProchainCoup()) + " (" + j.nomJoueur() + ")";
-            }
-            else {
+            } else {
                 cartes = cartes + ", " + String.valueOf(j.getProchainCoup()) + " (" + j.nomJoueur() + ")";
             }
         }
@@ -142,18 +114,17 @@ public class Output {
      * @param t
      * @return
      */
-    public static String tetesDeBoeufs(Table t){
+    public static String tetesDeBoeufs(Table t) {
         String message = "";
-        for (int i = 0; i < t.getJoueurs().size(); ++i){
-            if (t.getJoueurs().get(i).getPointsDM() > 0){
+        for (int i = 0; i < t.getJoueurs().size(); ++i) {
+            if (t.getJoueurs().get(i).getPointsDM() > 0) {
                 if (message == "") {
                     if (t.getJoueurs().get(i).getPointsDM() == 1) {
                         message = t.getJoueurs().get(i).nomJoueur() + " a ramassé " + String.valueOf(t.getJoueurs().get(i).getPointsDM()) + " tête de boeufs";
                     } else {
                         message = t.getJoueurs().get(i).nomJoueur() + " a ramassé " + String.valueOf(t.getJoueurs().get(i).getPointsDM()) + " têtes de boeufs";
                     }
-                }
-                else {
+                } else {
                     if (t.getJoueurs().get(i).getPointsDM() == 1) {
                         message = message + "\n" + t.getJoueurs().get(i).nomJoueur() + " a ramassé " + String.valueOf(t.getJoueurs().get(i).getPointsDM()) + " tête de boeufs";
                     } else {
@@ -162,7 +133,7 @@ public class Output {
                 }
             }
         }
-        if (message == ""){
+        if (message == "") {
             message = "Aucun joueur ne ramasse de tête de boeufs.";
         }
         return message;
@@ -177,11 +148,10 @@ public class Output {
         String message = "** Score final";
         t.getJoueurs().sort(Joueur::compareToNom); // ordre alphabétique
         t.getJoueurs().sort(Joueur::compareToPoints); // ordre classement
-        for (int i = 0; i < t.getJoueurs().size(); ++i){
-            if (t.getJoueurs().get(i).getPoints() > 1){
+        for (int i = 0; i < t.getJoueurs().size(); ++i) {
+            if (t.getJoueurs().get(i).getPoints() > 1) {
                 message = message + "\n" + t.getJoueurs().get(i).nomJoueur() + " a ramassé " + String.valueOf(t.getJoueurs().get(i).getPoints()) + " têtes de boeufs";
-            }
-            else {
+            } else {
                 message = message + "\n" + t.getJoueurs().get(i).nomJoueur() + " a ramassé " + String.valueOf(t.getJoueurs().get(i).getPoints()) + " tête de boeufs";
             }
 

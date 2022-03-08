@@ -1,6 +1,5 @@
 package Appli;
 
-import jeu.Carte;
 import jeu.Table;
 
 import java.util.Scanner;
@@ -24,11 +23,7 @@ public class Input {
             String var = sc.next();
             try {
                 coup = Integer.valueOf(var);
-                for (Carte c : t.getJoueurs().get(joueur).getDeck()){ // On vérifie que le joueur possède la carte
-                    if(c.getNum() == coup){
-                        choixValide = true;
-                    }
-                }
+                choixValide = t.getJoueurs().get(joueur).estDansPioche(coup);
                 if (!choixValide){
                     System.out.print("Vous n'avez pas cette carte, saisissez votre choix : ");
                 }
@@ -70,4 +65,5 @@ public class Input {
         }
         return serie;
     }
+
 }

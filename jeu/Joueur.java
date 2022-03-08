@@ -49,6 +49,19 @@ public class Joueur implements Comparable<Joueur>{
     }
 
     /**
+     *
+     */
+    public boolean estDansPioche(int carte){
+        boolean choixValide = false;
+        for (Carte c : this.deck){ // On vérifie que le joueur possède la carte
+            if(c.getNum() == carte){
+                choixValide = true;
+            }
+        }
+        return choixValide;
+    }
+
+    /**
      * Renvoie le nom du joueur
      * @return le nom
      */

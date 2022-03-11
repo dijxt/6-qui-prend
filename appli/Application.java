@@ -1,4 +1,4 @@
-package Appli;
+package appli;
 
 import jeu.Carte;
 import jeu.Table;
@@ -8,13 +8,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static Appli.Input.*;
-import static Appli.Output.*;
+import static appli.Input.*;
+import static appli.Output.*;
 
 import static util.Console.*;
 
 
-public class Main {
+public class Application {
     /**
      * Lit un fichier texte pour en extraire les joueurs de la partie.
      * @return Une liste de joueurs.

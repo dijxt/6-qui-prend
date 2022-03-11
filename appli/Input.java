@@ -1,4 +1,4 @@
-package Appli;
+package appli;
 
 import jeu.Table;
 

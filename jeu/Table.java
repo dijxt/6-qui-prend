@@ -109,7 +109,7 @@ public class Table {
     }
 
     /**
-     * Tri les joueurs par rapport à l'ordre des têtes de boeuf d'une manche
+     * Tri les joueurs par rapport à l'ordre des têtes de boeufs d'une manche
      */
     public void ordreTetes(){
         this.joueurs.sort(Joueur::compareToNom);
